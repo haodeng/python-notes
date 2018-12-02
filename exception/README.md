@@ -137,7 +137,7 @@ TypeError: unsupported operand type(s) for /: 'str' and 'int'
 
 Predefined Clean-up Actions
 
-Use with is a good practice.
+Use with is a good practice. file auto closed, like java try(closeable resources){}
 ```python
 with open("myfile.txt") as f:
     for line in f:
