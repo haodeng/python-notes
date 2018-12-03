@@ -65,7 +65,6 @@ fun2
 class MyClass2:
     i = 10
 
-
     def __init__(self, i):
         self.i = i
 
@@ -75,4 +74,44 @@ print(c.i)
 
 Result:
 5
+```
+
+```python
+class Dog:
+
+    tricks = []             # mistaken use of a class variable
+
+    def __init__(self, name):
+        self.name = name
+
+    def add_trick(self, trick):
+        self.tricks.append(trick)
+
+>>> d = Dog('Fido')
+>>> e = Dog('Buddy')
+>>> d.add_trick('roll over')
+>>> e.add_trick('play dead')
+>>> d.tricks                # unexpectedly shared by all dogs
+['roll over', 'play dead']
+```
+
+Correct design of the class should use an instance variable instead:
+```python
+class Dog:
+
+    def __init__(self, name):
+        self.name = name
+        self.tricks = []    # creates a new empty list for each dog
+
+    def add_trick(self, trick):
+        self.tricks.append(trick)
+
+>>> d = Dog('Fido')
+>>> e = Dog('Buddy')
+>>> d.add_trick('roll over')
+>>> e.add_trick('play dead')
+>>> d.tricks
+['roll over']
+>>> e.tricks
+['play dead']
 ```
